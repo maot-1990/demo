@@ -77,8 +77,8 @@ public class HttpUtils {
             String res = new String (((ByteArrayOutputStream) out).toByteArray(), "utf-8");
             if(clazz == String.class){
                 obj = res;
-            }else if(clazz == ResponseInfo.class){
-                obj = JSON.parseObject(res.trim(), ResponseInfo.class);
+            }else{
+                obj = JSON.parseObject(res.trim(), clazz);
             }
             System.out.println(obj.toString());
         }
@@ -113,8 +113,8 @@ public class HttpUtils {
             String res = new String (((ByteArrayOutputStream) out).toByteArray(), "utf-8");
             if(clazz == String.class){
                 obj = res;
-            }else if(clazz == ResponseInfo.class){
-                obj = JSON.parseObject(res.trim(), ResponseInfo.class);
+            }else{
+                obj = JSON.parseObject(res.trim(), clazz);
             }
             System.out.println(obj.toString());
         }
@@ -147,8 +147,8 @@ public class HttpUtils {
             String res = new String (((ByteArrayOutputStream) out).toByteArray(), "utf-8");
             if(clazz == String.class){
                 obj = res;
-            }else if(clazz == ResponseInfo.class){
-                obj = JSON.parseObject(res.trim(), ResponseInfo.class);
+            }else{
+                obj = JSON.parseObject(res.trim(), clazz);
             }
             System.out.println(obj.toString());
         }
