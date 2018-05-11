@@ -2,6 +2,8 @@ package com.github.test;
 
 import com.github.common.dto.RequestInfo;
 import com.github.common.po.User;
+import com.github.common.util.ArithTools;
+import com.github.common.util.DateUtils;
 import com.github.common.util.HttpUtils;
 import com.github.common.util.ReflectionUtils;
 import org.junit.Test;
@@ -9,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,26 +29,30 @@ public class CommonTest {
         user.setSex("boy");
         user.setCreateUser("who");
         System.out.println(ReflectionUtils.objToMap(user));*/
-        /*System.out.println(ArithTools.add(6.3548, 2.23154, 2));
-        System.out.println(ArithTools.div(6.3548, 2.23154, 2));
-        System.out.println(ArithTools.sub(6.3548, 2.23154, 2));
-        System.out.println(ArithTools.mul(6.3548, 2.23154, 2));
+        System.out.println(ArithTools.add(6.3548, 2.23154));
+        System.out.println(ArithTools.div(6.3548, 2.2315498));
+        System.out.println(ArithTools.div(6, 7));
+        System.out.println(ArithTools.sub(6.3548, 2.23154));
+        System.out.println(ArithTools.mul(6.3548, 2.23154));
 
         System.out.println(ArithTools.scale(3.21454, 2));
 
-        System.out.println(0.00 == 0);*/
+        System.out.println(0.00 == 0);
 
         /*Integer i = 9;
         Object obj = i;
         System.out.println(obj.getClass());*/
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        /*Map<String, Object> map = new HashMap<String, Object>();
         map.put("userName", "maot");
         map.put("sex", "boy");
         map.put("age", 28);
-        map.put("createUser", "who");
-        map.put("createTime", new Date());
-        System.out.println(ReflectionUtils.mapToObj(map, User.class).toString());
+        map.put("id", "12345678");
+        map.put("country", "he");
+        Object obj = ReflectionUtils.mapToObj(map, User.class);
+        System.out.println(((User)obj).toJsonString());
+        System.out.println(obj.toString());*/
+
     }
 
     @Test
@@ -65,5 +73,33 @@ public class CommonTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Test
+    public void test3() throws Exception{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = format.parse("2018-05-05");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DAY_OF_YEAR,-3);
+        System.out.println(calendar.getTime());
+        calendar.add(Calendar.DAY_OF_YEAR,-4);
+        System.out.println(calendar.getTime());
+
+        System.out.println(currentDate);
+    }
+
+    @Test
+    public void test4() throws Exception{
+        System.out.println(DateUtils.format(new Date(), DateUtils.YYYY_MM_DD));
+        System.out.println(DateUtils.format(new Date(), DateUtils.YYYYMMDD));
+        System.out.println(DateUtils.format(new Date(), DateUtils.YYYYMMDDHHMMSS));
+
+        System.out.println(DateUtils.parse("2018-02-14", DateUtils.YYYY_MM_DD));
+
+        System.out.println(DateUtils.addDay(new Date(), 2));
+
+        System.out.println(DateUtils.addMonth(new Date(), 4));
     }
 }

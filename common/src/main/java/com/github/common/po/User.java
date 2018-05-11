@@ -1,9 +1,9 @@
 package com.github.common.po;
 
 import com.github.common.annotation.Ignore;
-import com.github.common.base.BaseBean;
+import com.github.common.base.AbstractBean;
 
-public class User extends BaseBean {
+public class User extends AbstractBean {
 
     @Ignore
     private String id;
@@ -59,6 +59,7 @@ public class User extends BaseBean {
                 ", userName='" + userName + '\'' +
                 ", sex='" + sex + '\'' +
                 ", age=" + age +
-                '}' + "," + super.toString();
+                ", country=" + country +
+                '}';
     }
 }
