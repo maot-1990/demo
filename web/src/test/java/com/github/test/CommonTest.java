@@ -1,6 +1,8 @@
 package com.github.test;
 
+import com.github.common.calc.RepaymentModeCalc;
 import com.github.common.dto.RequestInfo;
+import com.github.common.enums.RepaymentModeEnum;
 import com.github.common.po.User;
 import com.github.common.util.ArithTools;
 import com.github.common.util.DateUtils;
@@ -101,5 +103,45 @@ public class CommonTest {
         System.out.println(DateUtils.addDay(new Date(), 2));
 
         System.out.println(DateUtils.addMonth(new Date(), 4));
+    }
+
+    @Test
+    public void test5() throws Exception{
+
+        System.out.println(DateUtils.addMonth(DateUtils.parse("2018-01-31","yyyy-MM-dd"), 1));
+
+        System.out.println(DateUtils.getDayByDate(DateUtils.addMonth(new Date(), 6)));
+        System.out.println(DateUtils.getMonthByDate(DateUtils.addMonth(new Date(), 6)));
+        System.out.println(DateUtils.getLastDayByDate(DateUtils.addMonth(new Date(), 6)));
+
+        System.out.println(DateUtils.setDayByDate(DateUtils.addMonth(new Date(), 1), 3));
+
+    }
+
+    @Test
+    public void test6() throws Exception{
+
+        RepaymentModeCalc.calculation(RepaymentModeEnum.DAILY_INTEREST_LSBQ, new Date(), DateUtils.addDay(new Date(), 60), 10000.00,
+                0.08, 90, 1);
+
+        RepaymentModeCalc.calculation(RepaymentModeEnum.MONTH_INTEREST_LSBQ, new Date(), DateUtils.addDay(new Date(), 60), 10000.00,
+                0.08, 3, 2);
+
+        RepaymentModeCalc.calculation(RepaymentModeEnum.DAILY_INTEREST_XXHB, DateUtils.parse("2018-01-15", "yyyy-MM-dd"), DateUtils.addDay(DateUtils.parse("2018-01-15", "yyyy-MM-dd"), 100), 1234.00,
+                0.08, 100, 1);
+
+        RepaymentModeCalc.calculation(RepaymentModeEnum.MONTH_INTEREST_XXHB, DateUtils.parse("2018-01-15", "yyyy-MM-dd"), DateUtils.addMonth(DateUtils.parse("2018-01-15", "yyyy-MM-dd"), 3), 1234.00,
+                0.08, 3, 2);
+
+        RepaymentModeCalc.calculation(RepaymentModeEnum.MONTH_INTEREST_DEBX, DateUtils.parse("2018-01-15", "yyyy-MM-dd"), DateUtils.addMonth(DateUtils.parse("2018-01-15", "yyyy-MM-dd"), 3), 1234.00,
+                0.08, 3, 2);
+
+        RepaymentModeCalc.calculation(RepaymentModeEnum.MONTH_INTEREST_DEBJ, DateUtils.parse("2018-01-15", "yyyy-MM-dd"), DateUtils.addMonth(DateUtils.parse("2018-01-15", "yyyy-MM-dd"), 3), 1234.00,
+                0.08, 3, 2);
+    }
+
+    @Test
+    public void test7() throws Exception{
+        System.out.println(ArithTools.roundUp(3.15));
     }
 }
